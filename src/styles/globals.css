@@ -30,9 +30,9 @@
   --color-link-hover: #7257ea;
   --color-link-active: #c2a7ff;
   --color-border: #d0d0d0;
-  --color-disabled-bg: #d0d0d0;
-  --color-disabled-text: #f1f1f1;
   --color-button-bg: rgba(138, 112, 252, 1);
+  --color-disabled-bg: #e8e1f7;
+  --color-disabled-text: rgba(138, 112, 252, 1);
   --color-button-hover-bg: rgba(114, 87, 234, 1);
   --color-button-active-bg: rgba(194, 167, 255, 1);
 }
@@ -73,7 +73,7 @@ a:active {
 }
 
 a.button:disabled {
-  background-color: var(--color-disabled-text);
+  background-color: var(--color-disabled-bg);
 }
 
 h1,
@@ -187,4 +187,5 @@ button:disabled,
 .button:disabled {
   background-color: var(--color-disabled-bg);
   color: var(--color-disabled-text);
+  cursor: not-allowed;
 }

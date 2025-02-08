@@ -62,7 +62,7 @@ describe('StarRating', () => {
     fireEvent.click(submitButton);
 
     expect(submitButton).toBeDisabled();
-    await waitFor(() => expect(submitButton).not.toBeDisabled());
+    await waitFor(() => expect(stars[3]).not.toHaveClass('marked'));
   });
 
   it('clears the selected star after saving', async () => {

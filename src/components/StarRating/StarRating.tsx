@@ -50,7 +50,7 @@ const StarRating = ({ rating, onRatingSelect }: StarRatingProps) => {
             type="button"
             className="mt-10 h-10 px-6"
             onClick={handleSubmit}
-            disabled={isSaving}
+            disabled={isSaving || !selectedRating}
           >
             {isSaving ? 'Saving...' : 'Submit review'}
           </Button>

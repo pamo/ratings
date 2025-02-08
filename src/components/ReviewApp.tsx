@@ -1,9 +1,9 @@
 import StarRating from '@/components/StarRating/StarRating';
-import { faker } from '@faker-js/faker';
 import { useEffect, useState } from 'react';
 
-import styles from './ReviewApp.module.css';
 import Review from '@/data/Review';
+import LeaveReview from './LeaveReview';
+import ReviewList from './ReviewList/ReviewList';
 
 const ReviewApp = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -25,49 +25,15 @@ const ReviewApp = () => {
     fetchReviews();
   }, []);
 
-  const addNewRating = async (rating: number) => {
-    const aPerson = faker.person;
-    const author = `${aPerson.firstName()} ${aPerson.lastName().charAt(0)}.`;
-    const newReview = {
-      author,
-      rating,
-      review: faker.lorem.sentence(),
-    };
-
-    try {
-      const response = await fetch('/api/review', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newReview),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to add review');
-      }
-
-      const addedReview = await response.json();
-      setReviews(prevReviews => [...prevReviews, addedReview]);
-    } catch (error) {
-      console.error('Failed to add review:', error);
-    }
+  const handleReviewSubmit = (newReview: Review) => {
+    setReviews(prevReviews => [...prevReviews, newReview]);
   };
+
   return (
-    <div>
-      {reviews.length > 0 ? (
-        reviews.map(review => (
-          <div key={review.id} className={styles.review}>
-            <h3>{review.author}</h3>
-            <StarRating rating={review.rating} />
-            {review.review && <p>{review.review}</p>}
-          </div>
-        ))
-      ) : (
-        <p>No reviews available.</p>
-      )}
-      <StarRating onRatingSelect={addNewRating} />
-    </div>
+    <>
+      <ReviewList reviews={reviews} />
+      <LeaveReview onReviewSubmit={handleReviewSubmit} />
+    </>
   );
 };
 
