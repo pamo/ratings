@@ -19,7 +19,7 @@ const Star = ({
     <span
       data-star-id={position}
       role={role}
-      className={`text-3xl ${hasHandlers ? 'cursor-pointer' : ''} ${marked ? 'marked' : ''}`}
+      className={`text-3xl ${hasHandlers ? 'cursor-pointer transition-colors duration-150 ease-linear hover:text-primary-purple' : ''} ${marked ? 'marked text-primary-purple' : 'text-gray-400'}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onClick={onClick}

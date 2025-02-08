@@ -26,14 +26,15 @@ const ReviewApp = () => {
   }, []);
 
   const addNewRating = async (rating: number) => {
+    const aPerson = faker.person;
+    const author = `${aPerson.firstName()} ${aPerson.lastName().charAt(0)}.`;
     const newReview = {
-      author: faker.name.fullName(),
+      author,
       rating,
       review: faker.lorem.sentence(),
     };
 
     try {
-      console.log('Sending POST request to /api/reviews with:', newReview);
       const response = await fetch('/api/review', {
         method: 'POST',
         headers: {
@@ -47,7 +48,6 @@ const ReviewApp = () => {
       }
 
       const addedReview = await response.json();
-      console.log('Received response:', addedReview);
       setReviews(prevReviews => [...prevReviews, addedReview]);
     } catch (error) {
       console.error('Failed to add review:', error);
