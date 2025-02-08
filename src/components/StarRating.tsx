@@ -1,6 +1,9 @@
-import Star from "@/components/Star";
+import Star from '@/components/Star';
 
-const StarRating = () => {
+interface StarRatingProps {
+  rating: number;
+}
+const StarRating = ({ rating }: StarRatingProps) => {
   return (
     <section className="flex flex-col items-center">
       <div>
@@ -19,5 +22,5 @@ const StarRating = () => {
   );
 };
 
-StarRating.displayName = "StarRating";
+StarRating.displayName = 'StarRating';
 export default StarRating;
