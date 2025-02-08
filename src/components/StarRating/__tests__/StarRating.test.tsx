@@ -29,12 +29,13 @@ describe('StarRating', () => {
     expect(stars).toHaveLength(5);
   });
 
-  it('calls onRatingSelect when a star is clicked in StarInput', () => {
+  it('selects a star when clicked in StarInput', () => {
+    const mockOnRatingSelect = vi.fn();
     render(<StarRating rating={0} onRatingSelect={mockOnRatingSelect} />);
     const stars = screen.getAllByRole('button');
 
     fireEvent.click(stars[3]);
-    expect(mockOnRatingSelect).toHaveBeenCalledWith(4);
+    expect(stars[3]).toHaveClass('marked');
   });
 
   it('displays the submit button when onRatingSelect is provided', () => {

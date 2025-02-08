@@ -1,4 +1,5 @@
 import StarRating from '@/components/StarRating/StarRating';
+import { faker } from '@faker-js/faker';
 import { useEffect, useState } from 'react';
 
 import styles from './ReviewApp.module.css';
@@ -24,6 +25,34 @@ const ReviewApp = () => {
     fetchReviews();
   }, []);
 
+  const addNewRating = async (rating: number) => {
+    const newReview = {
+      author: faker.name.fullName(),
+      rating,
+      review: faker.lorem.sentence(),
+    };
+
+    try {
+      console.log('Sending POST request to /api/reviews with:', newReview);
+      const response = await fetch('/api/review', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newReview),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add review');
+      }
+
+      const addedReview = await response.json();
+      console.log('Received response:', addedReview);
+      setReviews(prevReviews => [...prevReviews, addedReview]);
+    } catch (error) {
+      console.error('Failed to add review:', error);
+    }
+  };
   return (
     <div>
       {reviews.length > 0 ? (
@@ -37,6 +66,7 @@ const ReviewApp = () => {
       ) : (
         <p>No reviews available.</p>
       )}
+      <StarRating onRatingSelect={addNewRating} />
     </div>
   );
 };

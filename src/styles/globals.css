@@ -2,13 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-purple: #7c5dfa;
+  --primary-text: #1a1a1a;
+  --secondary-text: #4f4f4f;
+  --background-white: #ffffff;
+  --spacing-base: 1rem;
+
+  /* Spacing */
+  --spacing-base: 1rem;
+  --spacing-small: 0.5rem;
+  --spacing-large: 2rem;
+
+  /* Font Sizes */
+  --font-size-base: 1rem;
+  --font-size-small: 0.875rem;
+  --font-size-large: 1.25rem;
+  --font-size-h1: 2.5rem;
+  --font-size-h2: 2rem;
+
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+  --font-weight-semibold: 700;
+}
 
 body {
-  margin: 2em;
+  line-height: 1.5;
+  color: var(--primary-text);
+  margin: var(--spacing-large);
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-base);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-base);
+}
+
+p {
+  font-size: var(--font-size-base);
+}
+
+.button {
+  background-color: var(--primary-purple);
+  color: var(--background-white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.button:hover {
+  opacity: 0.9;
 }
