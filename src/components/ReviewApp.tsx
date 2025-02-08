@@ -1,4 +1,4 @@
-import StarRating from '@/components/StarRating';
+import StarRating from '@/components/StarRating/StarRating';
 import { useEffect, useState } from 'react';
 
 import styles from './ReviewApp.module.css';
