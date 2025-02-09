@@ -47,10 +47,9 @@ function LeaveReview({ onReviewSubmit }: LeaveReviewProps) {
   };
 
   return (
-    <div className="mt-8">
+    <div className="mb-8">
       <h2 className="text-2xl font-semibold mb-4">Leave your own review</h2>
       <StarRating onRatingSelect={addNewRating} />
-      {isSaving && <p>Saving...</p>}
       {error && <p className="text-red-500">{error}</p>}
     </div>
   );

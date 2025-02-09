@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import ReviewApp from '../components/ReviewApp';
 import '@testing-library/jest-dom';
 
@@ -27,6 +27,29 @@ describe('ReviewApp', () => {
 
     await waitFor(() => {
       expect(screen.getByText('No reviews available.')).toBeInTheDocument();
+    });
+  });
+
+  it('loads more reviews', async () => {
+    const mockMoreReviews = [
+      { id: 3, author: 'Alice Johnson', rating: 3, review: 'Good' },
+      { id: 4, author: 'Bob Brown', rating: 2, review: 'Okay' },
+    ];
+    fetchMock.mockResponses(
+      [JSON.stringify(mockReviews), { status: 200 }],
+      [JSON.stringify(mockMoreReviews), { status: 200 }],
+    );
+    render(<ReviewApp />);
+    await waitFor(() => {
+      expect(screen.getByText('John Doe')).toBeInTheDocument();
+      expect(screen.getByText('Jane Smith')).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByText('Load More'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Alice Johnson')).toBeInTheDocument();
+      expect(screen.getByText('Bob Brown')).toBeInTheDocument();
     });
   });
 });
