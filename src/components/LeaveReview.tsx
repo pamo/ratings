@@ -8,7 +8,6 @@ interface LeaveReviewProps {
 }
 
 function LeaveReview({ onReviewSubmit }: LeaveReviewProps) {
-  const [isSaving, setIsSaving] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const addNewRating = async (rating: number) => {
@@ -20,7 +19,6 @@ function LeaveReview({ onReviewSubmit }: LeaveReviewProps) {
       review: faker.lorem.paragraph(5),
     };
 
-    setIsSaving(true);
     setError(null);
 
     try {
@@ -41,8 +39,6 @@ function LeaveReview({ onReviewSubmit }: LeaveReviewProps) {
     } catch (error) {
       setError('Failed to add review. Please try again.');
       console.error('Failed to add review:', error);
-    } finally {
-      setIsSaving(false);
     }
   };
 

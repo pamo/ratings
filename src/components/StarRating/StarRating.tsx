@@ -48,6 +48,7 @@ const StarRating = ({ rating, onRatingSelect }: StarRatingProps) => {
         <>
           <Button
             type="button"
+            data-testid="submit-review-btn"
             className="primary mt-10 h-10 px-6"
             onClick={handleSubmit}
             disabled={isSaving || !selectedRating}

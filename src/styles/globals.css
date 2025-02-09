@@ -41,6 +41,18 @@
   .text-balance {
     text-wrap: balance;
   }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
 }
 
 body {
@@ -175,6 +187,10 @@ button:active,
   color: var(--background-white);
   border: 1px solid var(--color-link-hover);
 }
+button:disabled,
+.button:disabled {
+  cursor: not-allowed;
+}
 
 button.primary,
 .button.primary {
@@ -204,5 +220,4 @@ button.primary:disabled,
 .button.primary:disabled {
   background-color: var(--color-disabled-bg);
   color: var(--color-disabled-text);
-  cursor: not-allowed;
 }

@@ -52,4 +52,33 @@ describe('ReviewApp', () => {
       expect(screen.getByText('Bob Brown')).toBeInTheDocument();
     });
   });
+
+  it('adds a new review with fade-in animation', async () => {
+    fetchMock.mockResponseOnce(JSON.stringify(mockReviews));
+    render(<ReviewApp />);
+
+    await waitFor(() => {
+      expect(screen.getByText('John Doe')).toBeInTheDocument();
+      expect(screen.getByText('Jane Smith')).toBeInTheDocument();
+    });
+
+    const newAuthor = 'Batman';
+    const newReview = {
+      id: 3,
+      author: newAuthor,
+      rating: 3,
+      review: 'Good stuff',
+    };
+    const submitButton = screen.getByTestId('submit-review-btn');
+
+    fetchMock.mockResponseOnce(JSON.stringify(newReview));
+    fireEvent.click(screen.getAllByTestId('star-3')[0]);
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      const newReviewElement = screen.getByText(newAuthor);
+      expect(newReviewElement).toBeInTheDocument();
+      expect(newReviewElement.closest('div')).toHaveClass('animate-fade-in');
+    });
+  });
 });

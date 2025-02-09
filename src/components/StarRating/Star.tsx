@@ -18,6 +18,7 @@ const Star = ({
   return (
     <span
       data-star-id={position}
+      data-testid={`star-${position}`}
       role={role}
       className={`text-3xl ${hasHandlers ? 'cursor-pointer transition-colors duration-150 ease-linear hover:text-primary-purple' : ''} ${marked ? 'marked text-primary-purple' : 'text-gray-400'}`}
       onMouseEnter={onMouseEnter}
