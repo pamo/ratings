@@ -4,17 +4,17 @@ import StarRating from '@/components/StarRating/StarRating';
 
 interface ReviewListProps {
   reviews: Review[];
-  newReviewId: number | null;
+  newReviewIds: number[] | null;
 }
 
-function ReviewList({ reviews, newReviewId }: ReviewListProps) {
+function ReviewList({ reviews, newReviewIds }: ReviewListProps) {
   return (
     <div className="space-y-4">
       {reviews.length > 0 ? (
         reviews.map(review => (
           <div
             key={review.id}
-            className={`p-4 bg-white rounded-lg shadow-md hover:shadow-lg mx-auto my-6 box-border max-w-screen-lg transition-all ${review.id === newReviewId ? 'animate-fade-in' : ''}`}
+            className={`p-4 bg-white rounded-lg shadow-md hover:shadow-lg mx-auto my-6 box-border max-w-screen-lg transition-all ${newReviewIds?.includes(review.id) ? 'animate-fade-in' : ''}`}
           >
             <h3>{review.author}</h3>
             <StarRating rating={review.rating} />

@@ -9,7 +9,7 @@ const ReviewApp = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
-  const [newReviewId, setNewReviewId] = useState<number | null>(null);
+  const [newReviewIds, setNewReviewIds] = useState<number[] | null>(null);
 
   const fetchReviews = async (page: number) => {
     try {
@@ -22,6 +22,7 @@ const ReviewApp = () => {
         setHasMore(false);
       }
       setReviews(prevReviews => [...prevReviews, ...data]);
+      setNewReviewIds(data.map((review: Review) => review.id));
     } catch (error) {
       console.error('Failed to fetch reviews:', error);
     }
@@ -37,8 +38,8 @@ const ReviewApp = () => {
 
   const handleReviewSubmit = (newReview: Review) => {
     setReviews(prevReviews => [newReview, ...prevReviews]);
-    setNewReviewId(newReview.id);
-    setTimeout(() => setNewReviewId(null), 1000);
+    setNewReviewIds([newReview.id]);
+    setTimeout(() => setNewReviewIds(null), 1000);
   };
 
   const handleLoadMore = () => {
@@ -48,7 +49,7 @@ const ReviewApp = () => {
   return (
     <div className="w-full max-w-4xl mx-auto p-4 flex flex-col items-center">
       <LeaveReview onReviewSubmit={handleReviewSubmit} />
-      <ReviewList reviews={reviews} newReviewId={newReviewId} />
+      <ReviewList reviews={reviews} newReviewIds={newReviewIds} />
       <Button disabled={!hasMore} onClick={handleLoadMore} className="mt-4 p-2">
         Load More
       </Button>
