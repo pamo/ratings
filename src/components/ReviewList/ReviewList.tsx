@@ -9,13 +9,13 @@ interface ReviewListProps {
 
 function ReviewList({ reviews }: ReviewListProps) {
   return (
-    <div>
+    <div className="space-y-4">
       {reviews.length > 0 ? (
         reviews.map(review => (
           <div key={review.id} className={styles.reviewCard}>
             <h3>{review.author}</h3>
             <StarRating rating={review.rating} />
-            {review.review && <p>{review.review}</p>}
+            {review.review && <p className="text-balance">{review.review}</p>}
           </div>
         ))
       ) : (

@@ -17,7 +17,7 @@ function LeaveReview({ onReviewSubmit }: LeaveReviewProps) {
     const newReview = {
       author,
       rating,
-      review: faker.lorem.sentence(),
+      review: faker.lorem.paragraph(5),
     };
 
     setIsSaving(true);
@@ -47,8 +47,8 @@ function LeaveReview({ onReviewSubmit }: LeaveReviewProps) {
   };
 
   return (
-    <div>
-      <h2>Leave your own review</h2>
+    <div className="mt-8">
+      <h2 className="text-2xl font-semibold mb-4">Leave your own review</h2>
       <StarRating onRatingSelect={addNewRating} />
       {isSaving && <p>Saving...</p>}
       {error && <p className="text-red-500">{error}</p>}

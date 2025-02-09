@@ -30,10 +30,10 @@ const ReviewApp = () => {
   };
 
   return (
-    <>
+    <div className="w-full max-w-4xl mx-auto p-4">
       <ReviewList reviews={reviews} />
       <LeaveReview onReviewSubmit={handleReviewSubmit} />
-    </>
+    </div>
   );
 };
 
